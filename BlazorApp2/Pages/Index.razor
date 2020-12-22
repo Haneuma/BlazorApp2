@@ -1,0 +1,53 @@
+﻿@page "/"
+
+<h1>よるごはんなにたべたっけ</h1>
+
+<p>過去の夕食を検索できます。</p>
+
+
+@using BlazorApp2.Data
+@inject IDinnerViewModel dinnerViewModel
+
+@if (Dinners == null)
+{
+    <p><em>読込中...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>メニュー</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dinner in Dinners)
+            {
+                <tr>
+                    <td>@dinner.date.ToShortDateString()</td>
+                    <td>@dinner.menu</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+  
+}
+
+
+
+
+@code {
+
+      [Parameter]
+    public List<Dinner> Dinners { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await dinnerViewModel.GetDinnersAsync();
+        Dinners = dinnerViewModel.Dinners;
+    }
+
+}
