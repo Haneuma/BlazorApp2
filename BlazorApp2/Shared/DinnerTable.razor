@@ -1,12 +1,10 @@
-﻿@page "/"
-
+﻿
 <h1>よるごはんなにたべたっけ</h1>
 
 <p>過去の夕食を検索できます。</p>
+@using BlazorApp2.Data 
 
 
-@using BlazorApp2.Data
-@inject IDinnerViewModel dinnerViewModel
 
 @if (Dinners == null)
 {
@@ -33,10 +31,6 @@ else
     </table>
 }
 
-@code {
-  
-}
-
 
 
 
@@ -44,10 +38,6 @@ else
 
       [Parameter]
     public List<Dinner> Dinners { get; set; }
-    protected override async Task OnInitializedAsync()
-    {
-        await dinnerViewModel.GetDinnersAsync();
-        Dinners = dinnerViewModel.Dinners;
-    }
+
 
 }

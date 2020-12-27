@@ -1,0 +1,21 @@
+﻿@page "/"
+
+@using BlazorApp2.Data
+
+@inject IDinnerViewModel dinnerViewModel
+
+<DinnerTable Dinners ="@dinnerViewModel.Dinners" />
+
+
+
+
+@code {
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await dinnerViewModel.GetDinnersAsync();
+
+    }
+
+}
